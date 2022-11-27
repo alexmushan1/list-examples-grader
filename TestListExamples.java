@@ -6,32 +6,34 @@ import java.util.List;
 
 public class TestListExamples {
   // Write your grading tests here!
-  @Test(timeout = 4000)
-  public void testFilter() {
-    StringChecker nonempty = (String s) -> !s.isEmpty();
-    ArrayList<String> input1 = new ArrayList<String>();
-    Assert.assertEquals(input1, ListExamples.filter(input1, nonempty));
-    input1.add("a");
-    Assert.assertEquals(input1, ListExamples.filter(input1, nonempty));
-    input1.add("b");
-    Assert.assertEquals(input1, ListExamples.filter(input1, nonempty));
-    input1.add("");
-    Assert.assertEquals(
-        new ArrayList<String>(Arrays.asList("a", "b")), ListExamples.filter(input1, nonempty));
+  @Test
+  public void filterCorrectly() {
+    List<String> i = new ArrayList<String>();
+    List<String> endList = new ArrayList<String>();
+    i.add("1Hello");
+    i.add("We");
+    i.add("1Are");
+    i.add("Here");
+    StringChecker wc = new ObjChecker();
+    ListExamples.filter(i, wc);
+    endList.add("1Hello");
+    endList.add("1Are");
+    assertEquals(endList,ListExamples.filter(i,wc));
   }
 
-  @Test(timeout = 4000)
-  public void testMerge() {
-    ArrayList<String> input1 = new ArrayList<>(Arrays.asList("a"));
-    ArrayList<String> input2 = new ArrayList<>(Arrays.asList("b", "c", "d"));
-    ArrayList<String> test = new ArrayList<>(Arrays.asList("a", "b", "c", "d"));
-    Assert.assertEquals(test, ListExamples.merge(input1, input2));
-    input1 = new ArrayList<>(Arrays.asList("a", "b", "c"));
-    input2 = new ArrayList<>(Arrays.asList("d"));
-    test = new ArrayList<>(Arrays.asList("a", "b", "c", "d"));
-    Assert.assertEquals(test, ListExamples.merge(input1, input2));
-    Assert.assertEquals(
-        new ArrayList<String>(), ListExamples.merge(new ArrayList<>(), new ArrayList<>()));
+    @Test
+    public void correctOrderTest(){
+      List<String> list1 = new ArrayList<String>();
+      List<String> list2 = new ArrayList<String>();
+      list1.add("brownies");
+      list1.add("cakes");
+      list1.add("cookies");
+      list2.add("broccoli");
+      list2.add("carrots");
+      list2.add("spinach");
+      List<String> list3 = ListExamples.merge(list1, list2);
+      String[] expected = {"broccoli", "brownies","cakes","carrots","cookies","spinach"};
+      assertArrayEquals(expected, list3.toArray());
   }
   /* 
   @Test
