@@ -30,7 +30,7 @@ echo
     
 Score=0
 
-if  [[ $? -eq 0 ]]
+if  ! [[ $? -eq 0 ]]
 then
     echo "does not compile"
     #exit 1
@@ -40,8 +40,8 @@ else
     #echo "you got" $Score "points"
     #exit
 fi
-
-java -cp $CP org.junit.runnerJUnitCore TestListExamples > output.txt
+java -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar org.junit.runner.JUnitCore TestListExamples > output.txt
+#java -cp $CP org.junit.runnerJUnitCore TestListExamples > output.txt
 echo output.txt 
 
 
