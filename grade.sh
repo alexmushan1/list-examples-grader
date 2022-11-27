@@ -21,10 +21,8 @@ else
     cd ..
     javac -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar *.java 2> compileErr.txt
     #javac -cp $CP*.java 2> compileErr.txt
-    echo
-    [ -s compileErr.txt ]
 fi
-
+echo [ -s compileErr.txt ]
 
 
 
