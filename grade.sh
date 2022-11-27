@@ -40,17 +40,15 @@ else
     #echo "you got" $Score "points"
     #exit
 fi
-if [[ $? -eq 0 ]]
-then
-  Score=$(($Score+1))
-else
-  echo "Your score is" $Score
-fi
+
 
 java -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar org.junit.runner.JUnitCore TestListExamples > output.txt
 
-
-
+if [[ $? -eq 0 ]]
+then
+  Score=$(($Score+1))
+fi
+echo "Your score is" $Score
 echo < output.txt 
 
 
