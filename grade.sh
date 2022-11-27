@@ -6,24 +6,41 @@ rm -rf student-submission
 git clone $1 student-submission
 
 CP=".:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar"
-cp TestListExamples.java student-submission/
-cp -R lib student-submission
+
 cd student-submission
+
 if ! [[ -e ListExamples.java ]]
 then 
-    echo "wrong file provided"
+    echo "file not found"
     exit 1
 else
+    echo "file found"
+    cp TestListExamples.java student-submission/
+    cp -R lib student-submission
+    cd ..
     javac -cp $CP*.java 2> compileErr.txt
-    if ! [[ $? -eq 0 ]]
-    then
-        echo compileErr.txt $?
-        exit 1
-    fi
-    java -cp $CP org.junit.runnerJUnitCore TestListExamples > output.txt
-    echo compileErr.txt output.txt 
 fi
-    
 
+echo
+
+[ -s compileErr.txt ]
+
+
+    
+Score=0
+
+if  [[ $? -eq 0 ]]
+then
+    echo "does not compile"
+    exit 1
+    #Score=$(($Score+1))
+else
+    echo "compiled successfully"
+    #echo "you got" $Score "points"
+    #exit
+fi
+
+java -cp $CP org.junit.runnerJUnitCore TestListExamples > output.txt
+echo output.txt 
 
 
