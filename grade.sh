@@ -23,9 +23,9 @@ else
     #javac -cp $CP*.java 2> compileErr.txt
 fi
 
-echo
+#echo
 
-[ -s compileErr.txt ]
+#[ -s compileErr.txt ]
 
     
 Score=0
