@@ -24,7 +24,7 @@ if [ $? -eq 0 ]
 
 then
 	echo "ListExamples.java file can't compile!"
-	exit 1
+	#exit 1
 
 else
 	echo "ListExamples.java file is compiled successfully!"
