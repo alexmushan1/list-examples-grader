@@ -15,10 +15,12 @@ then
     exit 1
 else
     echo "file found"
-    cp TestListExamples.java student-submission/
-    cp -R lib student-submission
+    #cp TestListExamples.java student-submission/
+    cp ListExamples.java ./../
+    #cp -R lib student-submission
     cd ..
-    javac -cp $CP*.java 2> compileErr.txt
+    javac -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar *.java 2> compileErr.txt
+    #javac -cp $CP*.java 2> compileErr.txt
 fi
 
 echo
