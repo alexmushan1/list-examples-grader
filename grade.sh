@@ -27,14 +27,13 @@ echo
 
 [ -s compileErr.txt ]
 
-
     
 Score=0
 
 if  [[ $? -eq 0 ]]
 then
     echo "does not compile"
-    exit 1
+    #exit 1
     #Score=$(($Score+1))
 else
     echo "compiled successfully"
