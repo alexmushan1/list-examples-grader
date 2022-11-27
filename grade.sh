@@ -1,6 +1,5 @@
 # Create your grading script here
 
-#set -e
 set -e
 
 rm -rf student-submission
