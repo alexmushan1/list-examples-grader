@@ -44,7 +44,7 @@ fi
 
 java -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar org.junit.runner.JUnitCore TestListExamples > output.txt
 
-if [[ $? -eq 0 ]]
+if [[ $? -eq 1 ]]
 then
   Score=$(($Score+1))
 fi
