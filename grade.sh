@@ -18,7 +18,7 @@ else
     #cp TestListExamples.java student-submission/
     cp ListExamples.java ./../
     #cp -R lib student-submission
-    #cd ..
+    cd ..
     javac -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar *.java 2> compileErr.txt
     #javac -cp $CP*.java 2> compileErr.txt
 fi
@@ -30,7 +30,7 @@ fi
     
 Score=0
 
-if  ! [[ $? -eq 0 ]]
+if  [[ $? -eq 0 ]]
 then
     echo "does not compile"
     exit 1
