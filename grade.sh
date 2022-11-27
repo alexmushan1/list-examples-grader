@@ -1,44 +1,51 @@
-# Create your grading script here
-
-set -e
-
+rm -rf stderr.txt
 rm -rf student-submission
 git clone $1 student-submission
-cd student-submission/
-FILE=ListExamples.java
+cd student-submission
+if  ! [ -e ListExamples.java ]
 
-if [[ -f "$FILE" ]]
-then
-        echo "ListExamples.java exists!"
-else
-        echo "Cannot find ListExamples.java!"
-        echo "Your score is 0 out of 3!"
-        exit
+	then
+		echo "ListExamples.java file not found"
+		exit 1
+
+	else
+		cp ListExamples.java ./../
+		cd ..
+		javac -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar *.java 2> stderr.txt
 fi
 
-cp ../TestListExamples.java ./
+echo
 
-set +e
+[ -s stderr.txt ]
 
-SCORE=0
+if [ $? -eq 0 ]
 
-javac -cp ".;../lib/*" ListExamples.java TestListExamples.java
-
-if [[ $? -eq 0 ]]
 then
-  SCORE=$(($SCORE+1))
+	echo "ListExamples.java file can't compile!"
+	exit 1
+
 else
-  echo "Your score is" $SCORE "out of 3!"
-  exit
+	echo "ListExamples.java file is compiled successfully!"
 fi
 
-FAILED=$(java -cp ".;../lib/*" org.junit.runner.JUnitCore TestListExamples | grep -oP "(?<=,  Failures: )[0-9]+")
+java -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar org.junit.runner.JUnitCore TestListExamples > stdout.txt
 
-if [[ $? -eq 1 ]] # passed all tests
-then
-  SCORE=$(($SCORE+2))
-else
-  SCORE=$(($SCORE+2-$FAILED))
-fi
+echo
 
-echo "Your score is" $SCORE "out of 3!"
+COUNT_FILTER_TEST=$(grep -o "ListExamples.filter(" TestListExamples.java | wc -l)
+
+COUNT_MERGE_TEST=$(grep -o "ListExamples.merge(" TestListExamples.java | wc -l)
+
+COUNT_FILTER=$(grep -o "testFilter" stdout.txt | wc -l)
+
+COUNT_MERGE=$(grep -o "testMerge" stdout.txt | wc -l)
+
+PASSED_FILTER=$(echo "$COUNT_FILTER_TEST-$COUNT_FILTER/2" | bc)
+
+PASSED_MERGE=$(echo "$COUNT_MERGE_TEST-$COUNT_MERGE/2" | bc)
+
+echo "you passed $PASSED_FILTER out of $COUNT_FILTER_TEST test for filter() method!"
+
+echo
+
+echo "you passed $PASSED_MERGE out of $COUNT_MERGE_TEST for merge() method!"
