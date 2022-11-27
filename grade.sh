@@ -44,10 +44,9 @@ java -cp .:lib/hamcrest-core-1.3.jar:lib/junit-4.13.2.jar org.junit.runner.JUnit
 
 if [[ $? -eq 0 ]]
 then
-  SCORE=$(($SCORE+1))
+  Score=$(($Score+1))
 else
-  echo "Your score is" $SCORE "out of 3!"
-  exit
+  echo "Your score is" $Score "out of 3!"
 fi
 
 echo < output.txt 
