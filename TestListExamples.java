@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
 
-
-
 public class TestListExamples {
   // Write your grading tests here!
   @Test
-  public void filterCorrectly() {
+  public void testFilter() {
     List<String> i = new ArrayList<String>();
     List<String> endList = new ArrayList<String>();
     i.add("1Hello");
@@ -23,18 +21,18 @@ public class TestListExamples {
     assertEquals(endList,ListExamples.filter(i,wc));
   }
 
-    @Test
-    public void correctOrderTest(){
+  @Test
+  public void testMerge(){
       List<String> list1 = new ArrayList<String>();
       List<String> list2 = new ArrayList<String>();
-      list1.add("brownies");
-      list1.add("cakes");
-      list1.add("cookies");
-      list2.add("broccoli");
-      list2.add("carrots");
-      list2.add("spinach");
+      list1.add("a");
+      list1.add("b");
+      list1.add("c");
+      list2.add("d");
+      list2.add("e");
+      list2.add("f");
       List<String> list3 = ListExamples.merge(list1, list2);
-      String[] expected = {"broccoli", "brownies","cakes","carrots","cookies","spinach"};
+      String[] expected = {"a", "b","c","d","e","f"};
       assertArrayEquals(expected, list3.toArray());
   }
   /* 
